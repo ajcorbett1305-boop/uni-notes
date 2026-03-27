@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1773934970.54713 "notes.tex" "notes.pdf" "notes" 1773934970.82661 0
+["pdflatex"] 1774618225.42091 "notes.tex" "notes.pdf" "notes" 1774618225.70144 0
   "/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc" 1772820570 2375 baa924870cfb487815765f9094cf3728 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc" 1772820570 3486 c7eadf5dcc57b3b2d11736679f6636ba ""
   "/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc" 1772820570 2405 5dcf2c1b967ee25cc46c58cd52244aed ""
@@ -100,8 +100,8 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1772820570 43569 fd570f2fa160877d211e859f687312ba ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1773325866 5381098 9f966685d344a3d34adbc94f52661a01 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1773325859 2328190 7c166a5e67df79b5cd58610f25d9d529 ""
-  "notes.aux" 1773934970.77595 332 67eefda41569b143d793d7c33c98b435 "pdflatex"
-  "notes.tex" 1773934968.67395 11952 622dd401d0aae699701acf235bc4fa5a ""
+  "notes.aux" 1774618225.65442 332 547b5aee9923adda9b815deaea3280ea "pdflatex"
+  "notes.tex" 1774618216.47829 13882 d2eb118e7a1a8bc742e7b42c62c8dcb2 ""
   (generated)
   "notes.aux"
   "notes.log"

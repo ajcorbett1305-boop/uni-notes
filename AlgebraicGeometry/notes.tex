@@ -164,4 +164,28 @@
   \begin{proposition}
     Let $U_1,U_2$ be affine subspaces of $V$. Then $U_1\cap U_2$ and $U_1+U_2=\{u_1+u_2\mid u_1\in U_1, u_2\in U_2\}$ are also affine subspaces of $V$.
   \end{proposition}
+  \begin{proof}
+    If $U_1\cap U_2=\emptyset$, then $U_1\cap U_2$ is an affine subspace, so assume that $U_1\cap U_2\ne\emptyset$ and let $u_0\in U_1\cap U_2$. 
+    So $U_1=u_0+W_1, U_2=u_0+W_2$, where $W_1,W_2$ are vector subspaces of $V$ and $U_1\cap U_2=u_0+(W_1\cap W_2)$. THe intersection of linear subspaces is also a linear subspace, therefore $U_1\cap U_2$ is an affine subspace of $V$.\\
+    If either $U_1=\emptyset$ or $U_2=\emptyset$, then $U_1+U_2=\emptyset$, so it too is an affine subspace of $V$.\\
+    If neither $U_1$ nor $U_2$ is the empty set, then we can write them as $U_1=v_1+W_1,U_2=v_2+W_2$, where $v_1\in U_1$ and $v_2\in U_2$ and $W_1,W_2$ are linear subspaces of $V$. We have
+    \begin{align*}
+      U_1+U_2=&\{u_1+u_2\mid u_1\in U_1, u_2\in U_2\}\\
+              &\{(v_1+w_1)+(v_2+w_2)\mid w_1\in W_1, w_2\in W_2\}\\
+              &\{(v_1+v_2)+w\mid w\in W_1+W_2\}.
+    \end{align*}
+    $W_1+W_2$ is also a linear subspace of $V$, therefore $U_1+U_2$ is an affine subspace.
+  \end{proof}
+  \begin{definition}
+    The dimension of an affine subspace $U=u_0+W$ is defined to be $\dim{W}$. For convention we write $\dim{\emptyset}=-1$.
+  \end{definition}
+  \begin{definition}
+    Let $K$ be a field. $K^n$, considered as an affine subspace of itself, is called an $n$-dimensionsal affine space over $K$, and is denoted by $\mathbb{A}^n(K)$ or $\mathbb{A}^n$ if the field is understood.
+  \end{definition}
+  \begin{definition}
+    Let $V_1,V_2$ be vector spaces. An affine map from $V_1$ to $V_2$ is defined to be a function $\varphi:V_1\to V_2$ which can ve written in the form $\varphi(x):V_1\to V_2$ is a linear transformation and $b\in V_2$.
+  \end{definition}
+  \begin{definition}
+    Let $X,Y$ be subsets of a vector space $V$. $X$ and $Y$ are called affine equivalent if there exists mutually inverse affine maps $\varphi,\psi:V\to V$ such that $\varphi(X)=Y$ and $\psi(Y)=X$.
+  \end{definition}
 \end{document}
