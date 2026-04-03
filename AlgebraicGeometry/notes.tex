@@ -8,13 +8,15 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{silence}
+\usepackage{tikz-cd}
 \WarningFilter{LaTeX}{Font shape}
 
 \theoremstyle{remark}
 \newmdtheoremenv{definition}{\textbf{Definition}}[section]
 \newmdtheoremenv{proposition}[definition]{\textbf{Proposition}}
 \newmdtheoremenv{lemma}[definition]{\textbf{Lemma}}
-\newmdtheoremenv{theorem}[definition]{\textbf{Corollary}}
+\newmdtheoremenv{theorem}[definition]{\textbf{Theorem}}
+\newmdtheoremenv{corollary}[definition]{\textbf{Corollary}}
 \newtheorem{example}[definition]{\textbf{Example}}
 
 \renewcommand{\labelenumi}{(\roman*)}
@@ -188,4 +190,72 @@
   \begin{definition}
     Let $X,Y$ be subsets of a vector space $V$. $X$ and $Y$ are called affine equivalent if there exists mutually inverse affine maps $\varphi,\psi:V\to V$ such that $\varphi(X)=Y$ and $\psi(Y)=X$.
   \end{definition}
+\subsection{The Correspondence Between Varieties and Ideals}
+  \begin{definition}
+    Let $K$ be a field. Let $X\subseteq \mathbb{A}^n(K)$. The ideal of $X$ is defined as 
+    \[
+      \mathcal{I}(X)=\{f\in K[x_1,\dots,x_n]\mid f(a_1,\dots,a_n)=0,\forall (a_1,\dots,a_n)\in X\}.
+    \]
+  \end{definition}
+  $\mathcal{I}(X)$ is indeed an ideal of $K[x_1,\dots,x_n]$.
+  \begin{proposition}
+    Let $K$ be a field.
+    \begin{enumerate}
+      \item If $J\idealof K[x_1,\dots,x_n]$, then $J\subset \mathcal{I}(\mathcal{V}(J))$.
+      \item $X\subseteq \mathcal{V}(\mathcal{I}(X))$ for any $X\in \mathbb{A}^n(K)$. Equality holds if and only if $X$ is an affine algebraic variety.
+    \end{enumerate}
+  \end{proposition}
+  \begin{proof}$ $
+    \begin{enumerate}
+      \item Let $f\in J$. Then $f(P)=0$ for every $P\in \mathcal{V}(J)$ by the definition of $\mathcal{V}$, so $f\in \mathcal{I}(\mathcal{V}(J))$ by the definition of $\mathcal{I}$, therefore $J\subseteq \mathcal{I}(\mathcal{V}(J))$ as claimed. \qedhere
+    \end{enumerate}
+  \end{proof}
+  \begin{example}
+    Let $J=\left\langle x^2,y^2\right\rangle\idealof \mathbb{R}[x,y]$, then $\mathcal{V}(J)=\{(0,0)\}$, so $\mathcal{I}(\mathcal{V}(J))=\left\langle x,y\right\rangle\ne J$.
+  \end{example}
+  \begin{definition}
+    Let $R$ be a commutative ring. Let $I\idealof R$ be an ideal. The radical of $I$, denoted by $\sqrt{I}$, is 
+    \[
+      \sqrt{I}=\{a\in R\mid\exists n\in \mathbb{N} \text{ such that }a^n\in I\}.
+    \]
+    $I$ is called a radical ideal if $\sqrt{I}=I$.
+  \end{definition}
+  \begin{example}
+    $\sqrt{\left\langle x^2,y^2\right\rangle}=\left\langle x,y\right\rangle$, but in general, one has to consider the roots of the ideal, not just the generators.
+  \end{example}
+  \begin{definition}
+    A field $K$ is called algebraically closed if every polynomial of positive degree in $K[x]$ has a root in $K$.
+  \end{definition}
+  \begin{theorem}[Hilbert's Nullstellensatz]
+    Let $K$ be an algebraically closed field.
+    \begin{enumerate}
+      \item Any maximal ideal of $K[x_1,\dots,x_n]$ is of the form \[\left\langle x_1-a_1,\dots,x_n-a_n\right\rangle,\] where $a_i\in K, 1\le i\le n$.
+      \item If $J$ is a proper ideal of $K[x_1,\dots,x_n]$, then $\mathcal{V}(J)\ne\emptyset.$
+      \item $\mathcal{I}(\mathcal{V}(J))=\sqrt{J}$ for any $J\idealof K[x_1,\dots,x_n].$
+    \end{enumerate}
+  \end{theorem}
+  From the Nullstellensatz, we have that $\mathcal{V}$ and $\mathcal{I}$ are mutual inverse bijections of eachother between radical ideals and algebraic varieties:
+  \[
+    \begin{tikzcd}[column sep=huge]
+      \left\{\parbox{3.5cm}{\centering Radical ideals in\\ $K[x_1,\ldots,x_n]$}\right\}
+      \arrow[r, "\mathcal{V}", shift left=1.5ex]
+      \arrow[r, "\mathcal{I}", leftarrow, shift right=1.5ex]
+      &
+      \left\{\parbox{3.5cm}{\centering Affine algebraic\\ varieties in $\mathbb{A}^n$}\right\}
+    \end{tikzcd}
+  \]
+\subsection{Irreducibility}
+  \begin{definition}
+    An affine algebraic variety is said to be reducible if there exist affine algebraic varieties $V_1,V_2$ such that $V_1\ne V\ne V_2$ and $V=V_1\cup V_2$. If $V$ is not reducible, then it is called irreducible.
+  \end{definition}
+  \begin{example}$ $
+    \begin{enumerate}
+      \item The variety $\mathcal{V}\left(\left\langle x^2-y^2\right\rangle\right)\subset \mathbb{R}^2$ is reducable, since it is the union of $\mathcal{V}\left(\left\langle x-y\right\rangle\right)$ and $\mathcal{V}\left(\left\langle x+y\right\rangle\right)$, which are the lines $y=x$ and $y=-x$.
+      \item Any variety consisting of a single point is irreducible.
+      \item If $K$ is infinite, the affine line $\mathbb{A}^1$ is irreducible, since any subvariety is either a finite set or the whole of $\mathbb{A}^1$.
+    \end{enumerate}
+  \end{example}
+  \begin{theorem}
+    Every affine algebraic variety can be decomposed into a union $V=V_1\cup\cdots\cup V_k$ such that every $V_i,1\le i\le k$, is an irreducible affine algebraic variety and $V_i\not\subseteq V_j$ for $i\ne j$. the decomposition is unique up to the order of terms. We call the $V_i$ the irreducible components of $V$. 
+  \end{theorem}
 \end{document}
