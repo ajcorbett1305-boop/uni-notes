@@ -349,6 +349,38 @@
     \[\phi^*(f)=f\circ\phi=F\circ\phi=F(\phi_1,\dots,\phi_n)\]
     where $\phi_1,\dots,\phi_n\in K[V]$ are the components of $\phi$. As $F$ is a polynomial, $\phi^*(f)=F(\phi_1,\dots,\phi^n)\in K[V]$. An element of $K[V]$ is determined by its values as a finction $V\to K$, so $\phi^*(f)$ is a well-defined element of $K[V]$. This shows that $\phi^*$ is indeed a function $K[W]\to K[V]$.\\
     We know $\phi^*(\lambda)=\lambda$ for any $\lambda\in K$, and that $\phi^*(f+g)=\phi^*(f)+\phi^*(g)$ and $\phi^*(fg)=\phi^*(f)\phi^*(g)$ for all $f,g\in K[W]$ by the definition of $\phi^*$, and so $\phi^*$ is a homomorphism of rings which preserve $K$.\\
-    Given a homomorphism $\alpha:K[W]\to K[V]$ with $\alpha(\lambda)=\lambda$ for every $\lambda\in K$, let $\phi_i=\alpha(y_i+\mathcal{I}(W))$.
+    Given a homomorphism $\alpha:K[W]\to K[V]$ with $\alpha(\lambda)=\lambda$ for every $\lambda\in K$, let $\phi_i=\alpha(y_i+\mathcal{I}(W))\in K[V]$ for $i=1,\dots,n$. Then $\phi=(\phi_1,\dots,\phi_n)$ is clearly a morphism $V\to \mathbb{A}^n$. We need to prove that $\phi(V)\subseteq W$, so that $\phi$ is a mophism $V\to W$.\\
+    Let $P\in V$ an aribitrary point. In order to prove $\phi(P)\in W$, we need to show $g(\phi(P))=0$ for any $g\in\mathcal{I}(W)$.\\
+    Let $q:K[y_1,\dots,y_n]\to K[W]=K[y_1,\dots,y_n]/\mathcal{I}(W)$ be the quotient map $q(f)=f+\mathcal{I}(W)$. Then $\phi_i=\alpha(q(y_i))$, so 
+    \[g(\phi(P))=g(\alpha(q(y_1))(P),\dots,\alpha(q(y_n))(P)).\]
+    $g$ is a polynomial, composed of its variables, scalars in $K$, addition and multiplication, while $\alpha$ and $q$ are ring homomorphisms preserving $K$, therefore 
+    \[g(\alpha(q(y_1)),\dots,\alpha(q(y_n)))=\alpha(q(g(y_1,\dots,y_n)))=\alpha(0)=0\]
+    since $g\in \mathcal{I}(W)=\ker{q}$. If we substitute the co-ordinates of $P$, we obtain $g(\phi(P))=0$. As this holds for every $g\in \mathcal{I}(W)$, we have $\phi(P)\in W$, so $\phi$ is indeed a morphism $V\to W$.\\
+    If $\phi=(\phi_1,\dots,\phi_n)$ is a morphism of algebraic varieties $V\to W$, then $\phi_i=\phi^*(y_i+\mathcal{I}(W))$, so the ring homomorphism constructed from $\phi^*$ is exactly $\phi$. Conversely, if $\alpha$ is a ring homomorphism $\alpha:K[W]\to K[V]$ and $\phi:V\to W$ is the morphism of algebraic varieties constructed from $\alpha$, then $\alpha=\phi^*$.\\
+    This shows that the constructions associating a ring homomorphism to a homomorphism of algebraic varieties and a homomorphism of algebraic varieties to a ring homomorphism are inverses of each other, therefore $^*:\phi\mapsto\phi^*$ is a bijection.
   \end{proof}
+  \begin{corollary}
+    $\phi:V\to W$ is an isomorphism of affine algebraic varieties if and only if $\phi^*:K[W]\to K[V]$ is an isomorphism of rings. $V$ and $W$ are isomorphic if and only if there exists an isomorphism between $K[V]$ and $K[W]$ which preverses $K$.
+  \end{corollary}
+  \begin{definition}
+    An element $r$ in a ring is called nilpotent if there exists a positive integer $n$ such that $r^n=0$.
+  \end{definition}
+  \begin{example}
+    $\left\langle 8\right\rangle\idealof \mathbb{Z}$ is not a radical ideal, as $r\notin \left\langle 8\right\rangle$, but $2^3\in \left\langle 8\right\rangle$. The quotient ring $\mathbb{Z}_8=\mathbb{Z}/\left\langle 8\right\rangle$ has nilpotent elements other than $0$, for example, $(\bar{2})^3=\bar{0}$.
+  \end{example}
+  \begin{definition}
+    Let $K$ be a field. A ring $R$ is called $K$-algebra if it contains $K$ as a subring. A ring homomorphism $R\to S$ between $K$-algebra homomorphism if it preserves $K$. A $K$-algebra $R$ is called finitely generated if it can be generated as a ring by $K$ and finitely many other elements.
+  \end{definition}
+  \begin{example}$ $
+    \begin{enumerate}
+      \item A polynomial ring over $K$ is a $K$-algebra.
+      \item Co-ordinate rings of non-empty affine algebraic varieties over a field $K$ are finitely generated $K$-algebras.
+    \end{enumerate}
+  \end{example}
+  If $K$ is algebraically closed, co-ordinate rings of non-empty affine algebraic varieties over $K$ are exactly the finitely generated $K$-algebras with no nilpotent elements other than $0$. Hence, we have a bijection
+    \[\begin{tikzcd}[column sep=huge]
+      \left\{\parbox{3.5cm}{\centering Isomorphism classes\\ of non-empty\\affine algebraic\\varieties over $K$}\right\}
+      \arrow[r, "{V\mapsto K[V]}"]&
+      \left\{\parbox{4cm}{\centering Isomorphism classes\\ of finitely generated\\ $K$-algebras with no\\ nilpotents other than $0$}\right\}.
+    \end{tikzcd}\]
 \end{document}
