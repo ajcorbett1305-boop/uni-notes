@@ -18,13 +18,13 @@
 \newmdtheoremenv{theorem}[definition]{\textbf{Theorem}}
 \newmdtheoremenv{corollary}[definition]{\textbf{Corollary}}
 \newtheorem{example}[definition]{\textbf{Example}}
-
+\newcommand{\id}[1][]{\ifx#1\empty\operatorname{id}\else\operatorname{id}_{#1}\fi}
 \renewcommand{\labelenumi}{(\roman*)}
-
 \newcommand{\idealof}{\vartriangleleft}
 \newcommand{\idealgen}[1]{\ensuremath{\left\langle#1\right\rangle}}
 \newcommand{\seq}[2]{\ensuremath{#1_1,\dots,#1_{#2}}}
 \newcommand{\var}[1]{\ensuremath{\mathcal{V}\left(#1\right)}}
+\renewcommand{\phi}{\varphi}
 
 \title{Algebraic Geometry Notes}
 \author{Alex Corbett}
@@ -237,11 +237,11 @@
   From the Nullstellensatz, we have that $\mathcal{V}$ and $\mathcal{I}$ are mutual inverse bijections of eachother between radical ideals and algebraic varieties:
   \[
     \begin{tikzcd}[column sep=huge]
-      \left\{\parbox{3.5cm}{\centering Radical ideals in\\ $K[x_1,\ldots,x_n]$}\right\}
+      \left\{\parbox{3cm}{\centering Radical ideals in\\ $K[x_1,\ldots,x_n]$}\right\}
       \arrow[r, "\mathcal{V}", shift left=1.5ex]
       \arrow[r, "\mathcal{I}", leftarrow, shift right=1.5ex]
       &
-      \left\{\parbox{3.5cm}{\centering Affine algebraic\\ varieties in $\mathbb{A}^n$}\right\}
+      \left\{\parbox{2.8cm}{\centering Affine algebraic\\ varieties in $\mathbb{A}^n$}\right\}
     \end{tikzcd}
   \]
 \subsection{Irreducibility}
@@ -258,4 +258,97 @@
   \begin{theorem}
     Every affine algebraic variety can be decomposed into a union $V=V_1\cup\cdots\cup V_k$ such that every $V_i,1\le i\le k$, is an irreducible affine algebraic variety and $V_i\not\subseteq V_j$ for $i\ne j$. the decomposition is unique up to the order of terms. We call the $V_i$ the irreducible components of $V$. 
   \end{theorem}
+  \begin{proof}
+    We call an affine algebraic variety good if it can be written as the union of finitely many irreducible affine algebraic varieties and bad otherwise.\\
+    Assume that $V$ is a bad affine algebraic variety. $V$ cannot be irreducible, so $V=U_1\cup W_1$ for some proper subvarieties. Furthermore, at least one of $U_1$ and $W_1$ is bad, since if both of them were good, their union would also be good. Without loss of generality, assume $U_1$ is bad. Then, by a similar arguement, $U_1=U_2\cup W_2$, where $U_2$ and $W_2$ are both proper subvarieties of $U_1$, and at least one of them is bad, which we may assume to be $U_2$. Continuing this, we obtain an infinite strictly decreasing sequence $U_1\supsetneq U_2\supsetneq U_3\supsetneq\cdots$ of bad varieties. We know that $U_k\supsetneq U_{k+1}$ implies $\mathcal{I}(U_k)\subseteq\mathcal{I}(U_{k+1})$. As $U_k$ and $U_{k+1}$ are both affine algebraic varieties, $U_k=\mathcal{V}(\mathcal{I}(U_k))$ and $U_{k+1}=\mathcal{V}(\mathcal{I}(U_{k+1}))$. $\mathcal{V}(\mathcal{I}(U_{k}))\ne\mathcal{V}(\mathcal{I}(U_{k+1}))$, so $\mathcal{I}(U_k)\ne\mathcal{I}(U_{k+1})$. Hence, $\mathcal{I}(U_1)\subsetneq\mathcal{I}(U_2)\subsetneq\mathcal{I}(U_3)\subsetneq\cdots$ is a strictly increasing sequence of ideals, contradicting the Noetherian property of the polynomial ring, hence $V$ is not bad.\\
+    Therefore any affine algebraic variety is goos, and can be written as the union of finitely many irreducible affine algebraic varieties. By discarding the varieties which are contained in others, we can write $V=V_1\cup\cdots\cup V_k$ such that for every $V_i,1\le i\le k$, is an irreducible affine algebraic variety and $V_i\not\subseteq V_j$ for $i\ne j$. This proves the existence of the decomposition.\\
+    Let $V=V_1^\prime\cup\dots\cup V_\ell^\prime$ be anpther decomposition of $V$ into irreducible varieties with $V_i^\prime\not\subseteq V_j^\prime$ for $i\ne j$. Then
+    \[V_1=V_1\cap V=(V_1\cap V_1^\prime)\cup\cdots\cup(V_1\cap V_\ell^\prime).\]
+    As $V_1$ is irreducible, there exists $i$ such that $V_1=V_1\cap V_i^\prime$, that is $V_1\subseteq V_i^\prime$. By applying this argiment to $V_i^\prime$, we obtain that there exists $j$ such that $V_i^\prime\subseteq V_j$, therefore $V_1\subseteq V_j$. This implies $j=1$, and therefore $V_1=V_i^\prime$.
+    We apply this arguement to each $V_r,1\le r\le k$, and $V_s^\prime,1\le s\le\ell$, we obtain a bijection between $\{V_1,\dots,V_k\}$ and $\{V_1^\prime,\dots,V_\ell^\prime\}$, so the decomposition is unique up to ordering.
+  \end{proof}
+  \begin{definition}
+    Let $R$ be a commutative ring. An ideal $I\idealof R$ is called a prime ideal if $I\ne R$ and for every $a,b\in R,ab\in I$ implies $a\in I$ or $b\in I$.
+  \end{definition}
+  \begin{example}$ $
+    \begin{enumerate}
+      \item $\left\langle n\right\rangle=n \mathbb{Z}\idealof \mathbb{Z}$ is a prime ideal if and only if $n$ is a prime number or $n=0$.
+      \item Let $K$ be a field and let $f\in K[x_1,\dots x_n]$. The ideal $\left\langle f\right\rangle$ is a prime ideal of $K[x_1,\dots,x_n]$ if and only if $f$ is an irreducible polynomial or $f=0$.
+      \item Let $I=\left\langle x^2-1-y,x^2-1+y\right\rangle\idealof \mathbb{R}[x,y]$. We know $x^2-1-y$ and $x^2-1+y$ are irreducible polynomials. We have
+        \[\frac{x^2-1-y}{2}+\frac{x^2-1+y}{2}=x^2-1=(x-1)(x+1)\in I,\]
+        and $x-1,x+1\notin I$, so $I$ is not a prime ideal of $\mathbb{R}[x,y]$.
+    \end{enumerate}
+  \end{example}
+  \begin{proposition}
+    An affine algebraic variety $W\subseteq\mathbb{A}^n(K),W\ne\emptyset$, is irreducible if and only if $\mathcal{I}(W)$ is not prime.
+  \end{proposition}
+  From this proposition, and from the Nullstellensatz be have that $\mathcal{V}$ and $\mathcal{I}$ are mutually inverse bijections between prime ideals and non-empty irreducible affine algebraic varieties:
+  \[
+    \begin{tikzcd}[column sep=huge]
+      \left\{\parbox{3cm}{\centering Prime ideals in\\ $K[x_1,\ldots,x_n]$}\right\}
+      \arrow[r, "\mathcal{V}", shift left=1.5ex]
+      \arrow[r, "\mathcal{I}", leftarrow, shift right=1.5ex]
+      &
+      \left\{\parbox{5cm}{\centering Non-empty irreducible affine\\ algebraic varieties in $\mathbb{A}^n$}\right\}.
+    \end{tikzcd}
+  \]
+  \begin{lemma}
+    Let $n\ge2$ be an integer, let $K$ be a field and let $p\in K[x_1,\dots,x_n]$ be a polynomial which does not involve the variable $x_i$ for some $i, 1\le i\le n$, and which is not the square of another polynomial in $K[x_1,\dots,x_n]$. Then $x_i^2-p$ is irreducible in $K[x_1,\dots,x_n]$.
+  \end{lemma}
+\section{Morphisms and Co-ordinate Rings}
+  \begin{definition}
+    Let $V\subseteq \mathbb{A}^n(K)$ be an affine algebraic variety. Its co-ordinate ring, denoted by $K[V]$, is defined to be 
+    \[K[V]=K[x_1,\dots,x_n]/\mathcal{I}(V).\]
+  \end{definition}
+  \begin{example}$ $
+    \begin{enumerate}
+      \item Let $K$ be an infinite field, then $\mathcal{I}(\mathbb{A}^n)=\{0\}$, so $K[\mathbb{A}^n]=K[x_1,\dots,x_n]$.
+      \item Let $V=\mathcal{V}\left(\left\langle x^2+y^2-1\right\rangle\right)\subseteq \mathbb{C}^2$. $x^2+y^2-1$ is irreducible, so $\mathcal{I}(V)=\left\langle x^2+y^2-1\right\rangle$ and $\mathbb{C}[V]=\mathbb{C}[x,y]/\left\langle x^2+y^2-1\right\rangle$
+    \end{enumerate}
+  \end{example}
+  \begin{definition}
+    Let $V\subseteq \mathbb{A}^m(K)$ and $W\subseteq\mathbb{A}$ be affine algebraic varieties. A morphism $\phi:V\to W$ is a function of the form $\phi(P)=(\phi_1(P),\dots,\phi_n(P))$ with each $\phi_i\in K[V]$ for each $i,1\le i\le n$.
+  \end{definition}
+  Elements of $K[V]$ can be considered as morphisms $V\to \mathbb{A}^1$.
+  The composition of two morphisms $\phi:V\to W$ and $\psi:W\to X$ is a morphism $\psi\circ\phi:V\to X$.
+  \begin{definition}
+    The morphism $\phi:V\to W$ is called an isomorphism if it has an inverse morphism, that is, if there  exists a morphism $\psi:W\to V$ such that $\psi\circ\phi=\id[V]$ and $\phi\circ\psi=\id[W]$, where $\id[X]:X\to X$ is the identity finction for a set $X$. $V$ and $W$ are called isomorphic if there exists an isomorphism between them.
+  \end{definition}
+  \newpage
+  \begin{example}$ $
+    \begin{enumerate}
+      \item 
+        Any affine map is a morphism. Invertible affine maps are isomorphisms. Affine equivalent affine algebraic varieties are isomorphic.
+      \item 
+        Let $K$ be an arbitrary infinite field. Let $t$ be the co-ordinate on $\mathbb{A}^1$ and $x,y$ the co-ordinates on $\mathbb{A}^2$. Let $V=\mathbb{A}^1$ and $W\subseteq \mathbb{A}^2$ be the parabola defined by the equation $y-x^2=0$. Then $\mathcal{I}(V)=\{0\}, \mathcal{I}(W)=\left\langle y-x^2\right\rangle$, so $K[V]=K[t]$ and $K[W]=K[x,y]/\left\langle y-x^2\right\rangle$.\\
+        $\phi:V\to W, t\mapsto(t,t^2)$ is a morphism. $t$ and $t^2$ are elements of $K[V]$ and $x=t,y=t^2$ satisfy $y-x^2=0$ for any $t$.
+        $\psi:W\to V, (x,y)\to x$ is also a morphism. We know $x\in K[W]$ and have no equations to check. Then
+        \[(\psi\circ\phi)(t)=\psi(t,t^2)=t,\quad(\phi\circ\psi)(x,y)=\phi(x)=(x,x^2)=(x,y).\]
+        Hence $\phi$ and $\psi$ are inverses of eachother, so $V$ and $W$ are isomorphic.
+      \item 
+        Let $K$ be an infinite field of characteristic other than 2, for example $K=\mathbb{R}$ or $\mathbb{C}$. Let $V=\mathbb{A}^1$ and let $W\subseteq\mathbb{A}^2$ be the nodal curve defined by the equation $x^3+x^2-y^2=0$. $\phi:V\to W,t\mapsto(t^2-1,t(t^2-1))$ is a morphism. $t^2-1$ and $t(t^2-1)$ are element of $K[V]$ and $x=t^2-1,y=t(t^2-1)$ satisfy $x^3+x^2-y^2=0$ for any $t$, so $\phi$ is function $V\to W$. $\phi$ is not an isomorphism, since it is not injective, $\phi(1)=\phi(-1)=(0,0)$.
+      \item 
+        Let $H\subseteq \mathbb{A}^2$ be the hyperbola defined by $xy-1=0$, and let $\phi:H\to \mathbb{A}^1$ be the morphism $(x,y)\mapsto x$. $\phi$ is not an isomorphism, since it is not surjective because $0\notin\phi(H)$.
+      \item 
+        Let $V=\mathbb{A}^1$ and let $W=\mathcal{V}(\left\langle y^2-x^3\right\rangle)\subseteq \mathbb{A}^2$ be the cuspidal cubic curve. $\phi:V\to W, t\mapsto(t^2,t^3)$ is a morphism. $t^2$ and $t^3$ are elements of $K[V]$ and $x=t^2,y=t^3$ satisfy $y^2-x^3=0$ for any $t$, so $\phi$ is a morphism $V\to W$. $\phi$ is bijective as a fuction, but it is not an isomorphism. It has an inverse as a function
+        \[\psi:W\to V,\quad\psi(x,y)=\begin{cases}\frac{y}{x},&\text{if }x\ne 0,\\ 0,&\text{if }x=0,\end{cases}\]
+        but this is not a morphism.
+      \item
+        Let $x,y$ be the co-ordinates on $\mathbb{A}^2(\mathbb{C})$ and $u,v,w$ the co-ordinates on $\mathbb{A}^3(\mathbb{C})$. Let $V=\mathbb{A}^2$ and $W\subseteq \mathbb{A}^3$ be the variety given by the equation $uw-v^2=0$, a double cone. $\phi:V\to W,(x,y)\mapsto(x^2,xy,y^2)$ is a morphism. $x^2,xy,y^2$ are elements of $K[V]$ and $u=x^2,v=xy$ and $w=y^2$ satisfy
+        \[uw-v^2=x^2y^2-(xy)^2=0\]
+        for all $x,y$, therefore $\phi(V)\subseteq W$, so $\phi$ is indeed a morphism $V\to W$.
+      \item 
+        Let $V=\mathbb{A}^1(\mathbb{R})$ and let $W=\mathcal{V}\left(\left\langle x^2+y^2-1\right\rangle\right)\subseteq \mathbb{A}^2(\mathbb{R})$ be the unit circle. $\phi:V\to W,\phi(t)=(\cos{t},\sin{t})$ is a function from $V$ to $W$, but it is not a morphism, as $\cos{t}$ and $\sin{t}$ are not elements of $\mathbb{R}[\mathbb{A}^1]\cong \mathbb{R}[t]$.
+    \end{enumerate}
+  \end{example}
+  \begin{theorem}
+    Let $V\subseteq{A}^m(K),V\ne\emptyset$, and $W\subseteq \mathbb{A}^n(K)$ be affine algebraic varieties. For a morphism $\phi:V\to W$, define $\phi^*:K[W]\to K[V], \phi^*(f)=f\circ\phi$. Here, $^*:\phi\mapsto\phi^*$ is a bijection between morphisms of affine algebraic varieties $\phi:V\to W$ and ring homomorphisms $K[W]\to K[V]$ preserving $K$.
+  \end{theorem}
+  \begin{proof}
+    Let $f\in K[W]$. Let $y_1,\dots,y_n$ be the co-ordintates on $\mathbb{A}^n$. We know $f=F+\mathcal{I}(W)$ for some $F\in K[y_1,\dots,y_n]$. Now,
+    \[\phi^*(f)=f\circ\phi=F\circ\phi=F(\phi_1,\dots,\phi_n)\]
+    where $\phi_1,\dots,\phi_n\in K[V]$ are the components of $\phi$. As $F$ is a polynomial, $\phi^*(f)=F(\phi_1,\dots,\phi^n)\in K[V]$. An element of $K[V]$ is determined by its values as a finction $V\to K$, so $\phi^*(f)$ is a well-defined element of $K[V]$. This shows that $\phi^*$ is indeed a function $K[W]\to K[V]$.\\
+    We know $\phi^*(\lambda)=\lambda$ for any $\lambda\in K$, and that $\phi^*(f+g)=\phi^*(f)+\phi^*(g)$ and $\phi^*(fg)=\phi^*(f)\phi^*(g)$ for all $f,g\in K[W]$ by the definition of $\phi^*$, and so $\phi^*$ is a homomorphism of rings which preserve $K$.\\
+    Given a homomorphism $\alpha:K[W]\to K[V]$ with $\alpha(\lambda)=\lambda$ for every $\lambda\in K$, let $\phi_i=\alpha(y_i+\mathcal{I}(W))$.
+  \end{proof}
 \end{document}
